@@ -33,9 +33,19 @@ void setup() {
   elever = data.getJSONArray("elever");
   fagStatus = data.getJSONObject("fagStatus");
   
+  for (int i = 0; i < elever.size(); i++) {
+    JSONObject student = elever.getJSONObject(i);
+    if (!classes.contains(student.getString("klasse"))) {
+      classes.add(student.getString("klasse"));
+    }
+  }
+  
   controller = new Controller();
   view = new View();
   view.drawWelcomeScreen();
+  for (Object key : fagStatus.keys()) { // Skift til Object type
+    subjects.add((String) key); // Cast til String
+  }
 }
 
 // Function to toggle status for a specific subject using the enum state system

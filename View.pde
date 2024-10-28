@@ -15,6 +15,22 @@ class View {
     textAlign(LEFT);
     textSize(16);
     drawButton(width / 2, height - 50, "Tilbage");
+    text("Tilføj ny elev", width / 2, 30);
+  
+    textSize(14);
+    text("Fornavn: " + newFirstName, width / 2 - 100, 70);
+    text("Efternavn: " + newLastName, width / 2 - 100, 100);
+  
+    // Visning af klasser
+    text("Vælg klasse: ", width / 2 - 200, 130);
+    for (int i = 0; i < classes.size(); i++) {
+    if (i < 6) { // Vis flere klasser
+      fill(200);
+      rect(width / 2 - 200, 150 + i * 30, 150, 25);
+      fill(0);
+      text(classes.get(i), width / 2 - 175, 165 + i * 30);
+    }
+  }
   }
   void drawStudentList(JSONArray elever) {
     background(255);
