@@ -1,0 +1,90 @@
+{
+  "fagStatus": {
+    "Fysik B": 0,
+    "Fysik C": 1,
+    "Kemi B": 1,
+    "Historie B": 0,
+    "Matematik C": 1,
+    "Fysik A": 0,
+    "Programmering B": 1,
+    "Matematik B": 1,
+    "Engelsk B": 0,
+    "Matematik A": 0,
+    "Programmering C": 1,
+    "Dansk A": 0
+  },
+  "elever": [
+    {
+      "klasse": "L3b",
+      "efternavn": "Andersen",
+      "fornavn": "Mathias",
+      "fag": [
+        "Engelsk B",
+        "Matematik A",
+        "Fysik B"
+      ]
+    },
+    {
+      "klasse": "L3c",
+      "efternavn": "Nielsen",
+      "fornavn": "Freja",
+      "fag": [
+        "Fysik B",
+        "Kemi B",
+        "Historie B"
+      ]
+    },
+    {
+      "klasse": "L3d",
+      "efternavn": "Jensen",
+      "fornavn": "Oliver",
+      "fag": [
+        "Programmering B",
+        "Dansk A",
+        "Matematik B"
+      ]
+    },
+    {
+      "klasse": "L3di",
+      "efternavn": "Petersen",
+      "fornavn": "Sofie",
+      "fag": [
+        "Matematik A",
+        "Fysik C",
+        "Matematik C"
+      ]
+    },
+    {
+      "klasse": "L3e",
+      "efternavn": "Christensen",
+      "fornavn": "Emil",
+      "fag": [
+        "Engelsk B",
+        "Programmering C",
+        "Kemi B"
+      ]
+    },
+    {
+      "klasse": "L3i",
+      "efternavn": "Larsen",
+      "fornavn": "Clara",
+      "fag": [
+        "Kemi B",
+        "Historie B",
+        "Fysik A"
+      ]
+    },
+    {
+      "klasse": "",
+      "efternavn": "",
+      "fornavn": "",
+      "fag": [""]
+    },
+    {
+      "klasse": "",
+      "efternavn": "",
+      "fornavn": "",
+      "fag": [""]
+    }
+  ]
+}
