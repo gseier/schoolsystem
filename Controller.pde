@@ -1,0 +1,57 @@
+class Controller {
+  boolean showList = false;
+  boolean showSearch = false;
+
+  void handleMousePress(float mouseX, float mouseY) {
+    if (!showList && !showSearch) {
+      if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
+        showList = true;
+      } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 100)) {
+        showSearch = true;
+        searchResults.clear();
+      }
+    } else {
+      if (isButtonPressed(mouseX, mouseY, width / 2, height - 50)) {
+        resetViews();
+      }
+    }
+
+    if (showSearch && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
+      searchResults.clear();
+      searchStudents(searchInput);
+    }
+  }
+
+  void handleKeyPress(int keyCode, char key) {
+    if (keyCode == BACKSPACE) {
+      if (searchInput.length() > 0) {
+        searchInput = searchInput.substring(0, searchInput.length() - 1);
+      }
+    } else if (keyCode != ENTER) {
+      searchInput += key;
+    }
+  }
+
+  boolean isButtonPressed(float mouseX, float mouseY, float x, float y) {
+    return mouseX > x - 60 && mouseX < x + 60 && mouseY > y - 20 && mouseY < y + 20;
+  }
+
+  void resetViews() {
+    showList = false;
+    showSearch = false;
+    view.drawWelcomeScreen();
+  }
+
+  boolean isShowingList() {
+    return showList;
+  }
+
+  boolean isShowingSearch() {
+    return showSearch;
+  }
+  
+  void handleToggleFag(String fag) {
+    toggleFagStatus(fag);
+    view.drawStudentList(elever);
+  }
+}
