@@ -1,14 +1,17 @@
 class Controller {
   boolean showList = false;
   boolean showSearch = false;
+  boolean showNewStudent = false;
 
   void handleMousePress(float mouseX, float mouseY) {
-    if (!showList && !showSearch) {
+    if (!showList && !showSearch && !showNewStudent) {
       if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
         showList = true;
       } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 100)) {
         showSearch = true;
         searchResults.clear();
+      } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 180)) {
+        showNewStudent = true;
       }
     } else {
       if (isButtonPressed(mouseX, mouseY, width / 2, height - 50)) {
@@ -39,6 +42,7 @@ class Controller {
   void resetViews() {
     showList = false;
     showSearch = false;
+    showNewStudent = false;
     view.drawWelcomeScreen();
   }
 
@@ -48,6 +52,10 @@ class Controller {
 
   boolean isShowingSearch() {
     return showSearch;
+  }
+  
+  boolean isShowingNewStudent() {
+    return showNewStudent;
   }
   
   void handleToggleFag(String fag) {

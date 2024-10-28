@@ -8,8 +8,14 @@ class View {
 
     drawButton(width / 2, height / 2 + 20, "Vis Elever");
     drawButton(width / 2, height / 2 + 100, "Søg");
+    drawButton(width / 2, height / 2 + 180, "Ny Elev");
   }
-
+  void drawNewStudent() {
+    background(255);
+    textAlign(LEFT);
+    textSize(16);
+    drawButton(width / 2, height - 50, "Tilbage");
+  }
   void drawStudentList(JSONArray elever) {
     background(255);
     textAlign(LEFT);

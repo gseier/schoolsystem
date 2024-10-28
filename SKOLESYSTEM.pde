@@ -1,6 +1,13 @@
 JSONObject data;
 JSONArray elever;
 JSONObject fagStatus;
+ArrayList<String> classes = new ArrayList<String>();
+ArrayList<String> subjects = new ArrayList<String>();
+String newFirstName = "";
+String newLastName = "";
+String selectedClass = "";
+ArrayList<String> selectedSubjects = new ArrayList<String>();
+boolean isAdding = false;
 String searchInput = "";
 ArrayList<String> searchResults = new ArrayList<String>();
 Controller controller;
@@ -17,7 +24,7 @@ enum FagState {
 }
 
 void setup() {
-  size(800, 400);
+  size(800, 500);
   
   // Load the entire JSON object first
   data = loadJSONObject("elever.json");
@@ -77,6 +84,8 @@ void draw() {
     view.drawStudentList(elever);
   } else if (controller.isShowingSearch()) {
     view.drawSearchResults(searchResults, searchInput);
+  } else if (controller.isShowingNewStudent()) {
+    view.drawNewStudent();
   }
 }
 
