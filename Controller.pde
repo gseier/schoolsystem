@@ -33,11 +33,15 @@ class Controller {
 
   void handleKeyPress(int keyCode, char key) {
     if (keyCode == BACKSPACE) {
-      if (searchInput.length() > 0) {
+      if (searchInput.length() > 0 && showSearch) {
         searchInput = searchInput.substring(0, searchInput.length() - 1);
+      } else if (showNewStudent) {
       }
     } else if (keyCode != ENTER) {
-      searchInput += key;
+      if (showSearch) {
+        searchInput += key;
+      } else if (showNewStudent) {
+      }
     }
   }
 

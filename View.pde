@@ -25,12 +25,23 @@ class View {
     // Visning af klasser
     text("Vælg klasse: ", width / 2 - 200, 130);
     for (int i = 0; i < classes.size(); i++) {
-      if (i < classes.size()) { // Vis flere klasser
-        fill(200);
+      if (i < 10) { // Vis flere klasser
         drawButton(width / 2 - 200, 150 + i * 30, classes.get(i), 0.7);
-
+      }
+      if  (i < classes.size() && i > 9) {
+        drawButton(width / 2 - 300, 150 + i * 30 - 300, classes.get(i), 0.7);
+      }
     }
-  }
+    textSize(14);
+    text("Vælg fag: ", width / 2 + 200, 130);
+    for (int i = 0; i < subjects.size(); i++) {
+      if (i < 10) { // Vis flere fag
+        drawButton(width / 2 + 200, 150 + i * 30, subjects.get(i), 0.7);
+      }
+      if (i < subjects.size() && i > 9) {
+        drawButton(width / 2 + 300, 150 + i * 30 - 300, subjects.get(i), 0.7);
+      }
+    }
   }
   void drawStudentList(JSONArray elever) {
     background(255);
@@ -89,6 +100,9 @@ class View {
     fill(0);
     textAlign(CENTER);
     text("Søg", width / 2, height / 2 + 57);
+  }
+  
+  void drawNewStudentInputs() {
   }
 
   void drawButton(float x, float y, String label, float sizeMultiplier) {
