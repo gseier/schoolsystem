@@ -145,7 +145,7 @@ class Controller {
     newStudent.setString("fornavn", firstName);
     newStudent.setString("efternavn", lastName);
     newStudent.setString("klasse", klass);
-    newStudent.setJSONArray("hold", new JSONArray());
+    newStudent.setJSONArray("fag", new JSONArray());
 
   // Tilføj valgte fag til hold
     JSONArray subjectsArray = new JSONArray();

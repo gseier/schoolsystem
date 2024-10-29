@@ -21,8 +21,8 @@ class View {
     text("Tilføj ny elev", width / 2, 30);
   
     textSize(14);
-    text("Fornavn: " + newFirstName, width / 2 - 100, 70);
-    text("Efternavn: " + newLastName, width / 2 - 100, 100);
+    text("Fornavn: ", width / 2 - 100, 70);
+    text("Efternavn: ", width / 2 - 100, 100);
   
     // Visning af klasser
     text("Vælg klasse: ", width / 2 - 200, 130);
