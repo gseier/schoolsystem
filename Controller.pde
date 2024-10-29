@@ -2,10 +2,12 @@ class Controller {
   boolean showList = false;
   boolean showSearch = false;
   boolean showNewStudent = false;
+  boolean showNewSubject = false;
+  boolean showNewClass = false;
 
   void handleMousePress(float mouseX, float mouseY) {
     // MAIN PAGE
-    if (!showList && !showSearch && !showNewStudent) {
+    if (!showList && !showSearch && !showNewStudent && !showNewSubject && !showNewClass) {
       if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
         showList = true;
       } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 100)) {
@@ -13,6 +15,12 @@ class Controller {
         searchResults.clear();
       } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 180)) {
         showNewStudent = true;
+      } else if (isButtonPressed(mouseX, mouseY, width / 2 - 200, height / 2 + 180)) {
+        showNewSubject = true;
+        println ("Test");
+      } else if (isButtonPressed(mouseX, mouseY, width / 2 + 200, height / 2 + 180)) {
+        showNewClass = true;
+        println ("Test");
       }
     // UNIVERSAL BACK BUTTON
     } else {
@@ -29,6 +37,7 @@ class Controller {
       searchResults.clear();
       searchStudents(searchInput);
     }
+    
     // ADD STUDENT PAGE
     if (showNewStudent) {
       if (mouseX > width / 2 - 60 && mouseX < width / 2 + 120 - 60 && mouseY > height - 100 - 20 && mouseY < height - 100 - 20 + 40) {
@@ -43,39 +52,40 @@ class Controller {
           saveJSONObject(data, "elever.json"); // Gem ændringerne til JSON
         }
       }
-      for (int i = 0; i < classes.size(); i++) {
+      for (int i = 0; i < allClasses.size(); i++) {
         String className = allClasses.getString(i);
-        if (i < 10 && i < classes.size()) {
+        if (i < 10 && i < allClasses.size()) {
           if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
             selectedClass = className;
             println("Valgt klasse: " + className);
           }
-        } else if ( i > 9 && i < classes.size()) {
+        } else if ( i > 9 && i < allClasses.size()) {
           if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
             selectedClass = className;
             println("Valgt klasse: " + className);
           }
         }
       }
-      for (int i = 0; i < subjects.size(); i++) {
-        if (i < 10 && i < subjects.size()) {
+      for (int i = 0; i < allSubjects.size(); i++) {
+        String subjectName = allSubjects.getString(i);
+        if (i < 10 && i < allSubjects.size()) {
           if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
-            if (!selectedSubjects.contains(subjects.get(i))) {
-              selectedSubjects.add(subjects.get(i));
+            if (!selectedSubjects.contains(subjectName)) {
+              selectedSubjects.add(subjectName);
               println("Valgt fag: " + subjects.get(i));
             } else {
-              selectedSubjects.remove(subjects.get(i));
-              println("Fag fjernet: " + subjects.get(i));
+              selectedSubjects.remove(subjectName);
+              println("Fag fjernet: " + subjectName);
             }
           }
-        } else if (i > 9 && i < subjects.size()) {
+        } else if (i > 9 && i < allSubjects.size()) {
           if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
-            if (!selectedSubjects.contains(subjects.get(i))) {
-              selectedSubjects.add(subjects.get(i));
-              println("Valgt fag: " + subjects.get(i));
+            if (!selectedSubjects.contains(subjectName)) {
+              selectedSubjects.add(subjectName);
+              println("Valgt fag: " + subjectName);
             } else {
-              selectedSubjects.remove(subjects.get(i));
-              println("Fag fjernet: " + subjects.get(i));
+              selectedSubjects.remove(subjectName);
+              println("Fag fjernet: " + subjectName);
             }
           }
         }
@@ -92,6 +102,12 @@ class Controller {
       }
       
     }
+    if (showNewSubject && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
+      addSubject(newSubject);
+    }
+    if (showNewClass && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
+      addClass(newClass);
+    }
   }
 
   void handleKeyPress(int keyCode, char key) {
@@ -104,10 +120,18 @@ class Controller {
         } else if (focusedInputField == 2 && !newLastName.isEmpty()) {
           newLastName = newLastName.substring(0, newLastName.length() - 1);
         }
+      } else if (newSubject.length() > 0 && showNewSubject) {
+        newSubject = newSubject.substring(0, newSubject.length() - 1);
+      } else if (newClass.length() > 0 && showNewClass) {
+        newClass = newClass.substring(0, newClass.length() - 1);
       }
     } else if (keyCode != ENTER && keyCode != SHIFT) {
       if (showSearch) {
         searchInput += key;
+      } else if (showNewSubject) {
+        newSubject += key;
+      } else if (showNewClass) {
+        newClass += key;
       } else if (showNewStudent) {
         if (focusedInputField == 1) {
           newFirstName += key;
@@ -126,6 +150,8 @@ class Controller {
     showList = false;
     showSearch = false;
     showNewStudent = false;
+    showNewSubject = false;
+    showNewClass = false;
     view.drawWelcomeScreen();
   }
 
@@ -139,6 +165,14 @@ class Controller {
   
   boolean isShowingNewStudent() {
     return showNewStudent;
+  }
+  
+  boolean isShowingNewSubject() {
+    return showNewSubject;
+  }
+  
+  boolean isShowingNewClass() {
+    return showNewClass;
   }
   
   void handleToggleFag(String fag) {
@@ -161,4 +195,34 @@ class Controller {
   
     data.getJSONArray("elever").append(newStudent); // Tilføj ny elev til JSON
   }
+  void addSubject(String name) {
+    boolean subjectExists = false;
+    for (int i = 0; i < fagStatus.size(); i++) {
+      if (allSubjects.getString(i).equals(name)) {
+        subjectExists = true;
+        break;
+      }
+    }
+    if (!subjectExists) {
+      data.getJSONArray("fag").append(name);
+      fagStatus.setInt(name, 0);
+      println("NYT FAG TILFØJET");
+    }
+    saveJSONObject(data, "elever.json");
+  }
+  void addClass(String name) {
+    boolean classExists = false;
+    for (int i = 0; i < allClasses.size(); i++) {
+      if (allClasses.getString(i).equals(name)) {
+        classExists = true;
+        break;
+      }
+    }
+    if (!classExists) {
+      data.getJSONArray("klasser").append(name);
+      println("NY KLASSE TILFØJET");
+    }
+    saveJSONObject(data, "elever.json");
+  }
+  
 }

@@ -14,6 +14,8 @@ String selectedClass = "";
 ArrayList<String> selectedSubjects = new ArrayList<String>();
 boolean isAdding = false;
 String searchInput = "";
+String newSubject = "";
+String newClass = "";
 ArrayList<String> searchResults = new ArrayList<String>();
 Controller controller;
 View view;
@@ -105,6 +107,10 @@ void draw() {
     view.drawSearchResults(searchResults, searchInput);
   } else if (controller.isShowingNewStudent()) {
     view.drawNewStudent();
+  } else if (controller.isShowingNewSubject()) {
+    view.drawNewSubject();
+  } else if (controller.isShowingNewClass()) {
+    view.drawNewClass();
   }
 }
 

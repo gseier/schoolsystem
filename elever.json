@@ -1,18 +1,22 @@
 {
   "fagStatus": {
-    "Fysik B": 0,
-    "Fysik C": 1,
+    "Joe": 0,
     "Kemi B": 1,
-    "Historie B": 0,
-    "Matematik C": 1,
-    "Fysik A": 0,
+    "testtt": 0,
     "Programmering B": 1,
     "Matematik B": 1,
     "Engelsk B": 0,
     "Matematik A": 0,
     "Programmering C": 1,
-    "Dansk A": 0,
-    "Joe": 0
+    "Fysik B": 0,
+    "Fysik C": 1,
+    "Test": 0,
+    "Idræt": 0,
+    "Historie B": 0,
+    "Matematik C": 1,
+    "Fysik A": 0,
+    "testtest": 0,
+    "Dansk A": 0
   },
   "fag": [
     "Fysik B",
@@ -27,7 +31,11 @@
     "Matematik A",
     "Programmering C",
     "Dansk A",
-    "Joe"
+    "Joe",
+    "Test",
+    "testtt",
+    "Idræt",
+    "testtest"
   ],
   "klasser": [
     "L3b",
@@ -35,7 +43,8 @@
     "L3d",
     "L3di",
     "L3e",
-    "L3i"
+    "L3i",
+    "Test Klasse"
   ],
   "elever": [
     {
