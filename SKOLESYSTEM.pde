@@ -67,6 +67,7 @@ void toggleFagStatus(String fag) {
   // Toggle to the other state
   FagState newState = currentState.toggle();
   fagStatus.put(fag, newState.ordinal());
+  println("Skiftet " + fag + " til " + newState);
 }
 
 
@@ -104,14 +105,16 @@ void draw() {
   if (controller.isShowingList()) {
     view.drawStudentList(elever);
   } else if (controller.isShowingSearch()) {
-    view.drawSearchResults(searchResults, searchInput);
+    view.drawSearchResults(searchResults, searchInput); // searchResults, searchInput
   } else if (controller.isShowingNewStudent()) {
     view.drawNewStudent();
   } else if (controller.isShowingNewSubject()) {
     view.drawNewSubject();
   } else if (controller.isShowingNewClass()) {
     view.drawNewClass();
-  }
+  } else if (controller.isShowingUpdateSubject()) {
+    view.drawUpdateSubject();
+  } 
 }
 
 void mousePressed() {

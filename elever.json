@@ -118,6 +118,33 @@
       "efternavn": "Yeah",
       "fornavn": "Test",
       "fag": ["Joe"]
+    },
+    {
+      "klasse": "L3di",
+      "efternavn": "Doe",
+      "fornavn": "Joe",
+      "fag": [
+        "Matematik B",
+        "Fysik A",
+        "Kemi B"
+      ]
+    },
+    {
+      "klasse": "L3di",
+      "efternavn": "test",
+      "fornavn": "test",
+      "fag": ["Fysik A"]
+    },
+    {
+      "klasse": "L3di",
+      "efternavn": "aaaaa",
+      "fornavn": "tesssss",
+      "fag": [
+        "Matematik B",
+        "Engelsk B",
+        "Matematik A",
+        "testtest"
+      ]
     }
   ]
 }

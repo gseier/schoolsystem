@@ -4,10 +4,10 @@ class Controller {
   boolean showNewStudent = false;
   boolean showNewSubject = false;
   boolean showNewClass = false;
-
+  boolean showUpdateSubject = false;
   void handleMousePress(float mouseX, float mouseY) {
     // MAIN PAGE
-    if (!showList && !showSearch && !showNewStudent && !showNewSubject && !showNewClass) {
+    if (!showList && !showSearch && !showNewStudent && !showNewSubject && !showNewClass && !showUpdateSubject) {
       if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
         showList = true;
       } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 100)) {
@@ -21,6 +21,8 @@ class Controller {
       } else if (isButtonPressed(mouseX, mouseY, width / 2 + 200, height / 2 + 180)) {
         showNewClass = true;
         println ("Test");
+      } else if (isButtonPressed(mouseX, mouseY, width / 2 - 200, height / 2 + 100)) {
+        showUpdateSubject = true;
       }
     // UNIVERSAL BACK BUTTON
     } else {
@@ -72,7 +74,7 @@ class Controller {
           if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
             if (!selectedSubjects.contains(subjectName)) {
               selectedSubjects.add(subjectName);
-              println("Valgt fag: " + subjects.get(i));
+              println("Valgt fag: " + subjectName);
             } else {
               selectedSubjects.remove(subjectName);
               println("Fag fjernet: " + subjectName);
@@ -107,6 +109,23 @@ class Controller {
     }
     if (showNewClass && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
       addClass(newClass);
+    }
+    if (showUpdateSubject) {
+      for (int i = 0; i < allSubjects.size(); i++) {
+        String subjectName = allSubjects.getString(i);
+        if (i < 10 && i < allSubjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
+            toggleFagStatus(subjectName);
+            println("Fag opdateret");
+              
+          }
+        } else if (i > 9 && i < allSubjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
+            toggleFagStatus(subjectName);
+            println("Fag opdateret");
+          }
+        }
+      }
     }
   }
 
@@ -152,6 +171,7 @@ class Controller {
     showNewStudent = false;
     showNewSubject = false;
     showNewClass = false;
+    showUpdateSubject = false;
     view.drawWelcomeScreen();
   }
 
@@ -173,6 +193,10 @@ class Controller {
   
   boolean isShowingNewClass() {
     return showNewClass;
+  }
+  
+  boolean isShowingUpdateSubject() {
+    return showUpdateSubject;
   }
   
   void handleToggleFag(String fag) {

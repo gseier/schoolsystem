@@ -8,10 +8,27 @@ class View {
 
     drawButton(width / 2, height / 2 + 20, "Vis Elever", 1);
     drawButton(width / 2, height / 2 + 100, "Søg", 1);
-    drawButton(width / 2 + 200, height / 2 + 100, "Opdater Status", 1);
+    drawButton(width / 2 - 200, height / 2 + 100, "Opdater Status", 1);
     drawButton(width / 2, height / 2 + 180, "Ny Elev", 1);
     drawButton(width / 2 + 200, height / 2 + 180, "Ny Klasse", 1);
     drawButton(width / 2 - 200, height / 2 + 180, "Nyt Fag", 1);
+  }
+  void drawUpdateSubject() {
+    background(255);
+    textAlign(LEFT);
+    textSize(16);
+    drawButton(width / 2, height - 50, "Tilbage", 1);
+    textSize(14);
+    text("Vælg fag: ", width / 2 + 200, 130);
+    for (int i = 0; i < allSubjects.size(); i++) {
+      String subjectName = allSubjects.getString(i);
+      if (i < 10) { // Vis flere fag
+        drawButton(width / 2 + 200, 150 + i * 30, subjectName, 0.7);
+      }
+      if (i < allSubjects.size() && i > 9) {
+        drawButton(width / 2 + 300, 150 + i * 30 - 300, subjectName, 0.7);
+      }
+    }
   }
   void drawNewClass() {
     background(255);
