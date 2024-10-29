@@ -4,6 +4,7 @@ class Controller {
   boolean showNewStudent = false;
 
   void handleMousePress(float mouseX, float mouseY) {
+    // MAIN PAGE
     if (!showList && !showSearch && !showNewStudent) {
       if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
         showList = true;
@@ -13,15 +14,20 @@ class Controller {
       } else if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 180)) {
         showNewStudent = true;
       }
+    // UNIVERSAL BACK BUTTON
     } else {
       if (isButtonPressed(mouseX, mouseY, width / 2, height - 50)) {
         resetViews();
       }
     }
-
+    // SEARCH PAGE
     if (showSearch && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
       searchResults.clear();
       searchStudents(searchInput);
+    }
+    // ADD STUDENT PAGE
+    if (showNewStudent) {
+      
     }
   }
 

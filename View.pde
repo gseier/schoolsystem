@@ -6,15 +6,16 @@ class View {
     fill(0);
     text("Velkommen!", width / 2, height / 2 - 80);
 
-    drawButton(width / 2, height / 2 + 20, "Vis Elever");
-    drawButton(width / 2, height / 2 + 100, "Søg");
-    drawButton(width / 2, height / 2 + 180, "Ny Elev");
+    drawButton(width / 2, height / 2 + 20, "Vis Elever", 1);
+    drawButton(width / 2, height / 2 + 100, "Søg", 1);
+    drawButton(width / 2, height / 2 + 180, "Ny Elev", 1);
   }
   void drawNewStudent() {
     background(255);
     textAlign(LEFT);
     textSize(16);
-    drawButton(width / 2, height - 50, "Tilbage");
+    drawButton(width / 2, height - 50, "Tilbage", 1);
+    drawButton(width / 2, height - 100, "Tilføj", 1);
     text("Tilføj ny elev", width / 2, 30);
   
     textSize(14);
@@ -24,11 +25,10 @@ class View {
     // Visning af klasser
     text("Vælg klasse: ", width / 2 - 200, 130);
     for (int i = 0; i < classes.size(); i++) {
-    if (i < 6) { // Vis flere klasser
-      fill(200);
-      rect(width / 2 - 200, 150 + i * 30, 150, 25);
-      fill(0);
-      text(classes.get(i), width / 2 - 175, 165 + i * 30);
+      if (i < classes.size()) { // Vis flere klasser
+        fill(200);
+        drawButton(width / 2 - 200, 150 + i * 30, classes.get(i), 0.7);
+
     }
   }
   }
@@ -61,7 +61,7 @@ class View {
       text(navn + " - " + klasse + " - " + fagInfo, 50, 50 + i * 30);
     }
 
-    drawButton(width / 2, height - 50, "Tilbage");
+    drawButton(width / 2, height - 50, "Tilbage", 1);
   }
 
   void drawSearchResults(ArrayList<String> searchResults, String searchInput) {
@@ -73,7 +73,7 @@ class View {
       text(searchResults.get(i), 50, 50 + i * 30);
     }
 
-    drawButton(width / 2, height - 50, "Tilbage");
+    drawButton(width / 2, height - 50, "Tilbage", 1);
     drawSearchInput(searchInput);
   }
 
@@ -91,13 +91,13 @@ class View {
     text("Søg", width / 2, height / 2 + 57);
   }
 
-  void drawButton(float x, float y, String label) {
+  void drawButton(float x, float y, String label, float sizeMultiplier) {
     rectMode(CENTER);
     fill(100, 200, 100);
-    rect(x, y, 120, 40);
+    rect(x, y, 120 * sizeMultiplier, 40 * sizeMultiplier);
     fill(0);
     textAlign(CENTER);
-    textSize(16);
+    textSize(16 * sizeMultiplier);
     text(label, x, y + 7);
   }
 }
