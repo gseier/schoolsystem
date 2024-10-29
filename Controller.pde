@@ -17,6 +17,10 @@ class Controller {
     // UNIVERSAL BACK BUTTON
     } else {
       if (isButtonPressed(mouseX, mouseY, width / 2, height - 50)) {
+        newFirstName = "";
+        newLastName = "";
+        selectedClass = "";
+        selectedSubjects.clear();
         resetViews();
       }
     }
@@ -41,12 +45,12 @@ class Controller {
       }
       for (int i = 0; i < classes.size(); i++) {
         if (i < 10 && i < classes.size()) {
-          if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+          if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
             selectedClass = classes.get(i);
             println("Valgt klasse: " + selectedClass);
           }
-        } else if ( i > 10 && i < classes.size()) {
-          if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+        } else if ( i > 9 && i < classes.size()) {
+          if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
             selectedClass = classes.get(i);
             println("Valgt klasse: " + selectedClass);
           }
@@ -54,7 +58,7 @@ class Controller {
       }
       for (int i = 0; i < subjects.size(); i++) {
         if (i < 10 && i < subjects.size()) {
-          if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+          if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
             if (!selectedSubjects.contains(subjects.get(i))) {
               selectedSubjects.add(subjects.get(i));
               println("Valgt fag: " + subjects.get(i));
@@ -63,8 +67,8 @@ class Controller {
               println("Fag fjernet: " + subjects.get(i));
             }
           }
-        } else if (i > 10 && i < subjects.size()) {
-          if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+        } else if (i > 9 && i < subjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
             if (!selectedSubjects.contains(subjects.get(i))) {
               selectedSubjects.add(subjects.get(i));
               println("Valgt fag: " + subjects.get(i));
@@ -152,7 +156,7 @@ class Controller {
     for (String subject : selectedSubjects) {
       subjectsArray.append(subject);
     }
-    newStudent.setJSONArray("hold", subjectsArray);
+    newStudent.setJSONArray("fag", subjectsArray);
   
     data.getJSONArray("elever").append(newStudent); // Tilføj ny elev til JSON
   }

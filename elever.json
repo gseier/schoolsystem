@@ -76,21 +76,9 @@
     },
     {
       "klasse": "L3b",
-      "efternavn": "Joe",
+      "efternavn": "Bruh",
       "fornavn": "Test",
-      "fag": [],
-      "hold": ["Fysik B"]
-    },
-    {
-      "klasse": "L3b",
-      "efternavn": "Test",
-      "fornavn": "Testy testyy",
-      "fag": [],
-      "hold": [
-        "Kemi B",
-        "Fysik C",
-        "Fysik B"
-      ]
+      "fag": ["Kemi B"]
     }
   ]
 }
