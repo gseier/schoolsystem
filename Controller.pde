@@ -27,6 +27,64 @@ class Controller {
     }
     // ADD STUDENT PAGE
     if (showNewStudent) {
+      if (mouseX > width / 2 - 60 && mouseX < width / 2 + 120 - 60 && mouseY > height - 100 - 20 && mouseY < height - 100 - 20 + 40) {
+        if (!newFirstName.isEmpty() && !newLastName.isEmpty() && !selectedClass.isEmpty()) {
+          println("Test");
+          addStudent(newFirstName, newLastName, selectedClass);
+          isAdding = true;
+          newFirstName = "";
+          newLastName = "";
+          selectedClass = "";
+          selectedSubjects.clear();
+          saveJSONObject(data, "elever.json"); // Gem ændringerne til JSON
+        }
+      }
+      for (int i = 0; i < classes.size(); i++) {
+        if (i < 10 && i < classes.size()) {
+          if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+            selectedClass = classes.get(i);
+            println("Valgt klasse: " + selectedClass);
+          }
+        } else if ( i > 10 && i < classes.size()) {
+          if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+            selectedClass = classes.get(i);
+            println("Valgt klasse: " + selectedClass);
+          }
+        }
+      }
+      for (int i = 0; i < subjects.size(); i++) {
+        if (i < 10 && i < subjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+            if (!selectedSubjects.contains(subjects.get(i))) {
+              selectedSubjects.add(subjects.get(i));
+              println("Valgt fag: " + subjects.get(i));
+            } else {
+              selectedSubjects.remove(subjects.get(i));
+              println("Fag fjernet: " + subjects.get(i));
+            }
+          }
+        } else if (i > 10 && i < subjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + i * 28 && mouseY < 178 - 14 + i * 28) {
+            if (!selectedSubjects.contains(subjects.get(i))) {
+              selectedSubjects.add(subjects.get(i));
+              println("Valgt fag: " + subjects.get(i));
+            } else {
+              selectedSubjects.remove(subjects.get(i));
+              println("Fag fjernet: " + subjects.get(i));
+            }
+          }
+        }
+      }
+      if (mouseX > width / 2 + 50 - 100 && mouseX < width / 2 + 50 + 200 - 100 && mouseY > 70 - 15 && mouseY < 100 - 15) {
+        println("1");
+        focusedInputField = 1; // Fornavn
+      } else if (mouseX > width / 2 + 50 - 100 && mouseX < width / 2 + 50 + 200 - 100 && mouseY > 100 - 15 && mouseY < 130 - 15) {
+        focusedInputField = 2; // Efternavn
+        println("2");
+      } else {
+        focusedInputField = 0; // Ingen felt fokuseret
+        println("3");
+      }
       
     }
   }
@@ -36,11 +94,21 @@ class Controller {
       if (searchInput.length() > 0 && showSearch) {
         searchInput = searchInput.substring(0, searchInput.length() - 1);
       } else if (showNewStudent) {
+        if (focusedInputField == 1 && !newFirstName.isEmpty()) {
+          newFirstName = newFirstName.substring(0, newFirstName.length() - 1);
+        } else if (focusedInputField == 2 && !newLastName.isEmpty()) {
+          newLastName = newLastName.substring(0, newLastName.length() - 1);
+        }
       }
-    } else if (keyCode != ENTER) {
+    } else if (keyCode != ENTER && keyCode != SHIFT) {
       if (showSearch) {
         searchInput += key;
       } else if (showNewStudent) {
+        if (focusedInputField == 1) {
+          newFirstName += key;
+        } else if (focusedInputField == 2) {
+          newLastName += key;
+        }
       }
     }
   }
@@ -71,5 +139,21 @@ class Controller {
   void handleToggleFag(String fag) {
     toggleFagStatus(fag);
     view.drawStudentList(elever);
+  }
+  void addStudent(String firstName, String lastName, String klass) {
+    JSONObject newStudent = new JSONObject();
+    newStudent.setString("fornavn", firstName);
+    newStudent.setString("efternavn", lastName);
+    newStudent.setString("klasse", klass);
+    newStudent.setJSONArray("hold", new JSONArray());
+
+  // Tilføj valgte fag til hold
+    JSONArray subjectsArray = new JSONArray();
+    for (String subject : selectedSubjects) {
+      subjectsArray.append(subject);
+    }
+    newStudent.setJSONArray("hold", subjectsArray);
+  
+    data.getJSONArray("elever").append(newStudent); // Tilføj ny elev til JSON
   }
 }

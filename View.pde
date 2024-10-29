@@ -11,9 +11,11 @@ class View {
     drawButton(width / 2, height / 2 + 180, "Ny Elev", 1);
   }
   void drawNewStudent() {
+    
     background(255);
     textAlign(LEFT);
     textSize(16);
+    drawNewStudentInputs();
     drawButton(width / 2, height - 50, "Tilbage", 1);
     drawButton(width / 2, height - 100, "Tilføj", 1);
     text("Tilføj ny elev", width / 2, 30);
@@ -103,6 +105,16 @@ class View {
   }
   
   void drawNewStudentInputs() {
+    fill(255);
+    rect(width / 2 + 50, 70, 200, 30);
+    fill(0);
+    textAlign(LEFT);
+    text(newFirstName, width / 2 - 40, 70 + 8);
+    fill(255);
+    rect(width / 2 + 50, 100, 200, 30);
+    fill(0);
+    textAlign(LEFT);
+    text(newLastName, width / 2 - 40, 100 + 8);
   }
 
   void drawButton(float x, float y, String label, float sizeMultiplier) {

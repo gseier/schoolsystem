@@ -1,3 +1,6 @@
+import java.util.*;
+import processing.data.*;
+
 JSONObject data;
 JSONArray elever;
 JSONObject fagStatus;
@@ -12,6 +15,8 @@ String searchInput = "";
 ArrayList<String> searchResults = new ArrayList<String>();
 Controller controller;
 View view;
+
+int focusedInputField = 0; 
 
 // Define an enum for the status states
 enum FagState {

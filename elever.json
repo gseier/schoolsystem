@@ -75,16 +75,22 @@
       ]
     },
     {
-      "klasse": "",
-      "efternavn": "",
-      "fornavn": "",
-      "fag": [""]
+      "klasse": "L3b",
+      "efternavn": "Joe",
+      "fornavn": "Test",
+      "fag": [],
+      "hold": ["Fysik B"]
     },
     {
-      "klasse": "",
-      "efternavn": "",
-      "fornavn": "",
-      "fag": [""]
+      "klasse": "L3b",
+      "efternavn": "Test",
+      "fornavn": "Testy testyy",
+      "fag": [],
+      "hold": [
+        "Kemi B",
+        "Fysik C",
+        "Fysik B"
+      ]
     }
   ]
 }
