@@ -44,15 +44,16 @@ class Controller {
         }
       }
       for (int i = 0; i < classes.size(); i++) {
+        String className = allClasses.getString(i);
         if (i < 10 && i < classes.size()) {
           if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
-            selectedClass = classes.get(i);
-            println("Valgt klasse: " + selectedClass);
+            selectedClass = className;
+            println("Valgt klasse: " + className);
           }
         } else if ( i > 9 && i < classes.size()) {
           if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
-            selectedClass = classes.get(i);
-            println("Valgt klasse: " + selectedClass);
+            selectedClass = className;
+            println("Valgt klasse: " + className);
           }
         }
       }

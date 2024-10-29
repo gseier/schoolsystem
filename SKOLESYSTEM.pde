@@ -4,6 +4,8 @@ import processing.data.*;
 JSONObject data;
 JSONArray elever;
 JSONObject fagStatus;
+JSONArray allClasses;
+JSONArray allSubjects;
 ArrayList<String> classes = new ArrayList<String>();
 ArrayList<String> subjects = new ArrayList<String>();
 String newFirstName = "";
@@ -37,6 +39,8 @@ void setup() {
   // Extract the arrays/objects within it
   elever = data.getJSONArray("elever");
   fagStatus = data.getJSONObject("fagStatus");
+  allClasses = data.getJSONArray("klasser");
+  allSubjects = data.getJSONArray("fag");
   
   for (int i = 0; i < elever.size(); i++) {
     JSONObject student = elever.getJSONObject(i);

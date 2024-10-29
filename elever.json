@@ -11,8 +11,32 @@
     "Engelsk B": 0,
     "Matematik A": 0,
     "Programmering C": 1,
-    "Dansk A": 0
+    "Dansk A": 0,
+    "Joe": 0
   },
+  "fag": [
+    "Fysik B",
+    "Fysik C",
+    "Kemi B",
+    "Historie B",
+    "Matematik C",
+    "Fysik A",
+    "Programmering B",
+    "Matematik B",
+    "Engelsk B",
+    "Matematik A",
+    "Programmering C",
+    "Dansk A",
+    "Joe"
+  ],
+  "klasser": [
+    "L3b",
+    "L3c",
+    "L3d",
+    "L3di",
+    "L3e",
+    "L3i"
+  ],
   "elever": [
     {
       "klasse": "L3b",
@@ -79,6 +103,12 @@
       "efternavn": "Bruh",
       "fornavn": "Test",
       "fag": ["Kemi B"]
+    },
+    {
+      "klasse": "L3b",
+      "efternavn": "Yeah",
+      "fornavn": "Test",
+      "fag": ["Joe"]
     }
   ]
 }

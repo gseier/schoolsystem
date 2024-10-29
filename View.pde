@@ -9,6 +9,8 @@ class View {
     drawButton(width / 2, height / 2 + 20, "Vis Elever", 1);
     drawButton(width / 2, height / 2 + 100, "Søg", 1);
     drawButton(width / 2, height / 2 + 180, "Ny Elev", 1);
+    drawButton(width / 2 + 200, height / 2 + 180, "Ny Klasse", 1);
+    drawButton(width / 2 - 200, height / 2 + 180, "Nyt Fag", 1);
   }
   void drawNewStudent() {
     
@@ -26,22 +28,24 @@ class View {
   
     // Visning af klasser
     text("Vælg klasse: ", width / 2 - 200, 130);
-    for (int i = 0; i < classes.size(); i++) {
+    for (int i = 0; i < allClasses.size(); i++) {
+      String className = allClasses.getString(i);
       if (i < 10) { // Vis flere klasser
-        drawButton(width / 2 - 200, 150 + i * 30, classes.get(i), 0.7);
+        drawButton(width / 2 - 200, 150 + i * 30, className, 0.7);
       }
-      if  (i < classes.size() && i > 9) {
-        drawButton(width / 2 - 300, 150 + i * 30 - 300, classes.get(i), 0.7);
+      if  (i < allClasses.size() && i > 9) {
+        drawButton(width / 2 - 300, 150 + i * 30 - 300, className, 0.7);
       }
     }
     textSize(14);
     text("Vælg fag: ", width / 2 + 200, 130);
     for (int i = 0; i < subjects.size(); i++) {
+      String subjectName = allSubjects.getString(i);
       if (i < 10) { // Vis flere fag
-        drawButton(width / 2 + 200, 150 + i * 30, subjects.get(i), 0.7);
+        drawButton(width / 2 + 200, 150 + i * 30, subjectName, 0.7);
       }
-      if (i < subjects.size() && i > 9) {
-        drawButton(width / 2 + 300, 150 + i * 30 - 300, subjects.get(i), 0.7);
+      if (i < allSubjects.size() && i > 9) {
+        drawButton(width / 2 + 300, 150 + i * 30 - 300, subjectName, 0.7);
       }
     }
   }
