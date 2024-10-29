@@ -1,4 +1,27 @@
-class View {
+class View implements StudentObserver {
+  @Override
+    public void onStudentAdded(JSONObject student) {
+      
+        if (controller.isShowingList()) {
+           
+        }
+    }
+    
+    @Override
+    public void onStudentListChanged() {
+     
+        if (controller.isShowingList()) {
+           
+        }
+    }
+    
+    @Override
+    public void onFagStatusChanged(String fag, FagState newState) {
+
+        if (controller.isShowingList()) {
+           
+        }
+    }
   void drawWelcomeScreen() {
     background(255);
     textSize(24);
@@ -22,7 +45,7 @@ class View {
     text("Vælg fag: ", width / 2 + 200, 130);
     for (int i = 0; i < allSubjects.size(); i++) {
       String subjectName = allSubjects.getString(i);
-      if (i < 10) { // Vis flere fag
+      if (i < 10) {
         drawButton(width / 2 + 200, 150 + i * 30, subjectName, 0.7);
       }
       if (i < allSubjects.size() && i > 9) {
@@ -79,11 +102,11 @@ class View {
     text("Fornavn: ", width / 2 - 100, 70);
     text("Efternavn: ", width / 2 - 100, 100);
   
-    // Visning af klasser
+
     text("Vælg klasse: ", width / 2 - 200, 130);
     for (int i = 0; i < allClasses.size(); i++) {
       String className = allClasses.getString(i);
-      if (i < 10) { // Vis flere klasser
+      if (i < 10) {
         drawButton(width / 2 - 200, 150 + i * 30, className, 0.7);
       }
       if  (i < allClasses.size() && i > 9) {
@@ -94,7 +117,7 @@ class View {
     text("Vælg fag: ", width / 2 + 200, 130);
     for (int i = 0; i < allSubjects.size(); i++) {
       String subjectName = allSubjects.getString(i);
-      if (i < 10) { // Vis flere fag
+      if (i < 10) {
         drawButton(width / 2 + 200, 150 + i * 30, subjectName, 0.7);
       }
       if (i < allSubjects.size() && i > 9) {
@@ -116,8 +139,7 @@ class View {
       JSONArray fagArray = elev.getJSONArray("fag");
       for (int j = 0; j < fagArray.size(); j++) {
         String fag = fagArray.getString(j);
-        
-        // Get the current state using the enum
+
         int stateIndex = fagStatus.getInt(fag);
         FagState state = FagState.values()[stateIndex];
         
@@ -148,6 +170,27 @@ class View {
   }
 
   void drawSearchInput(String searchInput) {
+    text("Vælg klasse: ", width / 2 - 200, 130);
+    for (int i = 0; i < allClasses.size(); i++) {
+      String className = allClasses.getString(i);
+      if (i < 10) {
+        drawButton(width / 2 - 200, 150 + i * 30, className, 0.7);
+      }
+      if  (i < allClasses.size() && i > 9) {
+        drawButton(width / 2 - 300, 150 + i * 30 - 300, className, 0.7);
+      }
+    }
+    textSize(14);
+    text("Vælg fag: ", width / 2 + 200, 130);
+    for (int i = 0; i < allSubjects.size(); i++) {
+      String subjectName = allSubjects.getString(i);
+      if (i < 10) {
+        drawButton(width / 2 + 200, 150 + i * 30, subjectName, 0.7);
+      }
+      if (i < allSubjects.size() && i > 9) {
+        drawButton(width / 2 + 300, 150 + i * 30 - 300, subjectName, 0.7);
+      }
+    }
     fill(255);
     rect(width / 2, height / 2, 200, 30);
     fill(0);

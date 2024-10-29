@@ -22,11 +22,15 @@ View view;
 
 int focusedInputField = 0; 
 
-// Define an enum for the status states
+interface StudentObserver {
+    void onStudentAdded(JSONObject student);
+    void onStudentListChanged();
+    void onFagStatusChanged(String fag, FagState newState);
+}
+
 enum FagState {
   AKTIV, AFSLUTTET;
   
-  // Method to toggle between the two states
   FagState toggle() {
     return this == AKTIV ? AFSLUTTET : AKTIV;
   }
@@ -35,10 +39,8 @@ enum FagState {
 void setup() {
   size(800, 500);
   
-  // Load the entire JSON object first
   data = loadJSONObject("elever.json");
 
-  // Extract the arrays/objects within it
   elever = data.getJSONArray("elever");
   fagStatus = data.getJSONObject("fagStatus");
   allClasses = data.getJSONArray("klasser");
@@ -54,26 +56,19 @@ void setup() {
   controller = new Controller();
   view = new View();
   view.drawWelcomeScreen();
-  for (Object key : fagStatus.keys()) { // Skift til Object type
-    subjects.add((String) key); // Cast til String
+  for (Object key : fagStatus.keys()) {
+    subjects.add((String) key);
   }
 }
 
-// Function to toggle status for a specific subject using the enum state system
 void toggleFagStatus(String fag) {
   int currentStateIndex = fagStatus.getInt(fag);
   FagState currentState = FagState.values()[currentStateIndex];
   
-  // Toggle to the other state
   FagState newState = currentState.toggle();
   fagStatus.put(fag, newState.ordinal());
   println("Skiftet " + fag + " til " + newState);
 }
-
-
-
-
-// View class to handle drawing on the screen
 
 
 void searchStudents(String query) {
@@ -85,7 +80,6 @@ void searchStudents(String query) {
       for (int j = 0; j < fagArray.size(); j++) {
         String fag = fagArray.getString(j);
         
-        // Get the current state using the enum
         int stateIndex = fagStatus.getInt(fag);
         FagState state = FagState.values()[stateIndex];
         
@@ -101,11 +95,77 @@ void searchStudents(String query) {
   }
 }
 
+void searchStudentsBySubject(String subject) {
+  searchResults.clear();
+
+  for (int i = 0; i < elever.size(); i++) {
+    JSONObject elev = elever.getJSONObject(i);
+    String navn = elev.getString("fornavn") + " " + elev.getString("efternavn");
+    String klasse = elev.getString("klasse");
+
+    StringBuilder fagInfo = new StringBuilder();
+    JSONArray fagArray = elev.getJSONArray("fag");
+    boolean hasSubject = false;
+
+    for (int j = 0; j < fagArray.size(); j++) {
+      String fag = fagArray.getString(j);
+
+      if (fag.equalsIgnoreCase(subject)) {
+        hasSubject = true;
+      }
+
+      int stateIndex = fagStatus.getInt(fag);
+      FagState state = FagState.values()[stateIndex];
+
+      fagInfo.append(fag).append(" (").append(state).append("), ");
+    }
+
+    if (fagInfo.length() > 2) {
+      fagInfo.setLength(fagInfo.length() - 2);
+    }
+
+    if (hasSubject) {
+      searchResults.add(navn + " - " + klasse + " - " + fagInfo);
+    }
+  }
+}
+
+void searchStudentsByClass(String klasseQuery) {
+  searchResults.clear();
+
+  for (int i = 0; i < elever.size(); i++) {
+    JSONObject elev = elever.getJSONObject(i);
+    String navn = elev.getString("fornavn") + " " + elev.getString("efternavn");
+    String klasse = elev.getString("klasse");
+
+    if (klasse.equalsIgnoreCase(klasseQuery)) {
+
+      StringBuilder fagInfo = new StringBuilder();
+      JSONArray fagArray = elev.getJSONArray("fag");
+
+      for (int j = 0; j < fagArray.size(); j++) {
+        String fag = fagArray.getString(j);
+
+        int stateIndex = fagStatus.getInt(fag);
+        FagState state = FagState.values()[stateIndex];
+
+        fagInfo.append(fag).append(" (").append(state).append("), ");
+      }
+
+      if (fagInfo.length() > 2) {
+        fagInfo.setLength(fagInfo.length() - 2);
+      }
+
+      searchResults.add(navn + " - " + klasse + " - " + fagInfo);
+    }
+  }
+}
+
 void draw() {
   if (controller.isShowingList()) {
     view.drawStudentList(elever);
   } else if (controller.isShowingSearch()) {
-    view.drawSearchResults(searchResults, searchInput); // searchResults, searchInput
+    view.drawSearchResults(searchResults, searchInput);
   } else if (controller.isShowingNewStudent()) {
     view.drawNewStudent();
   } else if (controller.isShowingNewSubject()) {

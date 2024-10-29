@@ -6,7 +6,6 @@ class Controller {
   boolean showNewClass = false;
   boolean showUpdateSubject = false;
   void handleMousePress(float mouseX, float mouseY) {
-    // MAIN PAGE
     if (!showList && !showSearch && !showNewStudent && !showNewSubject && !showNewClass && !showUpdateSubject) {
       if (isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 20)) {
         showList = true;
@@ -24,7 +23,6 @@ class Controller {
       } else if (isButtonPressed(mouseX, mouseY, width / 2 - 200, height / 2 + 100)) {
         showUpdateSubject = true;
       }
-    // UNIVERSAL BACK BUTTON
     } else {
       if (isButtonPressed(mouseX, mouseY, width / 2, height - 50)) {
         newFirstName = "";
@@ -34,13 +32,40 @@ class Controller {
         resetViews();
       }
     }
-    // SEARCH PAGE
     if (showSearch && isButtonPressed(mouseX, mouseY, width / 2, height / 2 + 50)) {
       searchResults.clear();
       searchStudents(searchInput);
     }
-    
-    // ADD STUDENT PAGE
+    if (showSearch) {
+      for (int i = 0; i < allClasses.size(); i++) {
+        String className = allClasses.getString(i);
+        if (i < 10 && i < allClasses.size()) {
+          if (mouseX > width / 2 - 200 - 42 && mouseX < width / 2 - 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
+            searchResults.clear();
+            searchStudentsByClass(className);
+          }
+        } else if ( i > 9 && i < allClasses.size()) {
+          if (mouseX > width / 2 - 200 - 42 - 100 && mouseX < width / 2 - 200 + 84 - 42 - 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
+            searchResults.clear();
+            searchStudentsByClass(className);
+          }
+        }
+      }
+      for (int i = 0; i < allSubjects.size(); i++) {
+        String subjectName = allSubjects.getString(i);
+        if (i < 10 && i < allSubjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 && mouseX < width / 2 + 200 + 84 - 42 && mouseY > 150 - 14 + i * 30 && mouseY < 178 - 14 + i * 30) {
+            searchResults.clear();
+            searchStudentsBySubject(subjectName);
+          }
+        } else if (i > 9 && i < allSubjects.size()) {
+          if (mouseX > width / 2 + 200 - 42 + 100 && mouseX < width / 2 + 200 + 84 - 42 + 100 && mouseY > 150 - 14 + (i-10) * 30 && mouseY < 178 - 14 + (i-10) * 30) {
+            searchResults.clear();
+            searchStudentsBySubject(subjectName);
+          }
+        }
+      }
+    }
     if (showNewStudent) {
       if (mouseX > width / 2 - 60 && mouseX < width / 2 + 120 - 60 && mouseY > height - 100 - 20 && mouseY < height - 100 - 20 + 40) {
         if (!newFirstName.isEmpty() && !newLastName.isEmpty() && !selectedClass.isEmpty()) {
@@ -51,7 +76,7 @@ class Controller {
           newLastName = "";
           selectedClass = "";
           selectedSubjects.clear();
-          saveJSONObject(data, "elever.json"); // Gem ændringerne til JSON
+          saveJSONObject(data, "elever.json");
         }
       }
       for (int i = 0; i < allClasses.size(); i++) {
@@ -94,12 +119,12 @@ class Controller {
       }
       if (mouseX > width / 2 + 50 - 100 && mouseX < width / 2 + 50 + 200 - 100 && mouseY > 70 - 15 && mouseY < 100 - 15) {
         println("1");
-        focusedInputField = 1; // Fornavn
+        focusedInputField = 1;
       } else if (mouseX > width / 2 + 50 - 100 && mouseX < width / 2 + 50 + 200 - 100 && mouseY > 100 - 15 && mouseY < 130 - 15) {
-        focusedInputField = 2; // Efternavn
+        focusedInputField = 2;
         println("2");
       } else {
-        focusedInputField = 0; // Ingen felt fokuseret
+        focusedInputField = 0;
         println("3");
       }
       
@@ -210,14 +235,14 @@ class Controller {
     newStudent.setString("klasse", klass);
     newStudent.setJSONArray("fag", new JSONArray());
 
-  // Tilføj valgte fag til hold
+
     JSONArray subjectsArray = new JSONArray();
     for (String subject : selectedSubjects) {
       subjectsArray.append(subject);
     }
     newStudent.setJSONArray("fag", subjectsArray);
   
-    data.getJSONArray("elever").append(newStudent); // Tilføj ny elev til JSON
+    data.getJSONArray("elever").append(newStudent);
   }
   void addSubject(String name) {
     boolean subjectExists = false;
